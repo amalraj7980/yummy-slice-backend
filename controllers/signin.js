@@ -28,21 +28,11 @@ exports.signin = async (req, res) => {
                         uuid: userInfo.uuid,
                         username: userInfo.username
                     }
-                    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '150s' })
-                    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1000s' })
-
-                    // client.SET(user.uuid, refreshToken, 'EX', 1000, (err, reply) => {
-                    //     if (err) {
-                    //         console.log(err)
-                    //         return
-                    //     }
-                    //     return reply
-                    // })
+                    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
                     return res.json({
                         auth: true,
                         status: 'SUCCESS',
                         token: token,
-                        refreshToken: refreshToken,
                         user
                     })
                 } else {
