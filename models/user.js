@@ -41,37 +41,25 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     mobileNumber: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: true,
-        notEmpty: true
-      }
+      type: DataTypes.STRING
     },
     alternateMobileNumber: {
       type: DataTypes.STRING,
     },
     address: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: true,
-        notEmpty: true
-      }
+      type: DataTypes.STRING
     },
     landmark: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: true,
-        notEmpty: true
-      }
+      type: DataTypes.STRING
     },
     deviceId: {
       type: DataTypes.STRING,
       allowNull: false
     },
     OTP: {
+      type: DataTypes.STRING
+    },
+    role:{
       type: DataTypes.STRING
     }
   }, {

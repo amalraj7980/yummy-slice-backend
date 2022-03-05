@@ -1,12 +1,11 @@
 const { User } = require("../models")
 const jwt = require('jsonwebtoken');
-// const client = require("../redis/redis");
 
 require('dotenv').config()
 
 
 exports.signin = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
     if (!email || !password)
         return res.json({
             message: 'Enter your credentials!!!'
@@ -17,7 +16,7 @@ exports.signin = async (req, res) => {
     })
     try {
         await User.findOne({
-            attributes: ['uuid', 'username'],
+            attributes: ['uuid', 'username', 'role'],
             where: {
                 email, password
             }
@@ -28,21 +27,11 @@ exports.signin = async (req, res) => {
                         uuid: userInfo.uuid,
                         username: userInfo.username
                     }
-                    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '150s' })
-                    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1000s' })
-
-                    // client.SET(user.uuid, refreshToken, 'EX', 1000, (err, reply) => {
-                    //     if (err) {
-                    //         console.log(err)
-                    //         return
-                    //     }
-                    //     return reply
-                    // })
+                    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
                     return res.json({
                         auth: true,
                         status: 'SUCCESS',
                         token: token,
-                        refreshToken: refreshToken,
                         user
                     })
                 } else {

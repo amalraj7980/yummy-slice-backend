@@ -115,7 +115,8 @@ exports.proceedToCheckout = async (req, res) => {
                         })
                     res.json({
                         status: 'FAILED',
-                        message: 'Internal server down'
+                        message: 'Internal server down',
+                        order
                     })
                 } else {
                     res.json({
@@ -262,7 +263,8 @@ exports.orderUpdates = async (req, res) => {
                 console.log(data)
                 res.json({
                     status: 'SUCCESS',
-                    message: 'Order updated'
+                    message: 'Order updated',
+                    data
                 })
             }).catch(err => {
                 console.log("Error in all order details await", err)
