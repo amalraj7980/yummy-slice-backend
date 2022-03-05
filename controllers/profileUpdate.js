@@ -37,7 +37,8 @@ exports.updateProfile = async (req, res) => {
             .then((updated) => {
                 if (updated) return res.json({
                     status: 'SUCCESS',
-                    message: 'Successfully updated your profile'
+                    message: 'Successfully updated your profile',
+                    updated
                 })
                 return res.json({
                     status: 'FAILED',
