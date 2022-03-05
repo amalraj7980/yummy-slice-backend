@@ -25,7 +25,8 @@ exports.productAdding = async (req, res) => {
                 .then(result => {
                     return res.json({
                         status: 'SUCCESS',
-                        message: 'Product is added'
+                        message: 'Product is added',
+                        result
                     })
                 })
                 .catch(err => {
@@ -82,7 +83,8 @@ exports.productUpdate = async (req, res) => {
                     }).then(data => {
                         res.json({
                             status: 'SUCCESS',
-                            message: 'Product updated'
+                            message: 'Product updated',
+                            data
                         })
                     }).catch(err => {
                         console.log("Error in product update try catch block", err)
@@ -114,17 +116,13 @@ exports.productUpdate = async (req, res) => {
 }
 
 exports.getProducts = async (req, res) => {
-    const { pages, limit, uuid } = req.body;
+    const { uuid } = req.body;
     try {
         if (isNaN(pages) || isNaN(limit))
             return res.send({
                 message: 'Enter valid a valid count'
             })
-        const products = await Products.findAndCountAll({
-            limit: limit,
-            offset: (pages - 1) * limit
-        })
-        console.log(products)
+        const products = await Products.findAndCountAll()
         if (products) {
             let user;
             if (uuid !== '' && uuid !== undefined ) {
@@ -132,9 +130,6 @@ exports.getProducts = async (req, res) => {
                     where: { uuid }
                 })
             }
-            const total = Math.ceil(products.count / limit);
-            const count = products.count;
-
             let wishlisted;
             if (user) {
                 wishlisted = await Wishlist.findAll({
@@ -143,18 +138,12 @@ exports.getProducts = async (req, res) => {
                 })
                 return res.json({
                     status: 'SUCCESS',
-                    totalPages: total,
-                    totalRecords: count,
-                    limit: limit,
                     content: products.rows,
                     wishlists: wishlisted ? wishlisted : 'No wishlists added by the user'
                 })
             } else {
                 return res.json({
                     status: 'SUCCESS',
-                    totalPages: total,
-                    totalRecords: count,
-                    limit: limit,
                     content: products.rows,
                     wishlists: wishlisted ? wishlisted : 'No wishlists added by the user'
                 })
