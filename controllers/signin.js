@@ -1,12 +1,11 @@
 const { User } = require("../models")
 const jwt = require('jsonwebtoken');
-// const client = require("../redis/redis");
 
 require('dotenv').config()
 
 
 exports.signin = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
     if (!email || !password)
         return res.json({
             message: 'Enter your credentials!!!'
@@ -17,7 +16,7 @@ exports.signin = async (req, res) => {
     })
     try {
         await User.findOne({
-            attributes: ['uuid', 'username'],
+            attributes: ['uuid', 'username', 'role'],
             where: {
                 email, password
             }
