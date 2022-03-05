@@ -7,9 +7,10 @@ exports.signup = async (req, res) => {
         mobileNumber,
         address,
         landmark,
-        userDeviceId
+        userDeviceId,
+        role
     } = req.body;
-    if (!username || !email || !password || !mobileNumber)
+    if (!username || !email || !password )
         return res.json({
             message: 'Enter your credentials!!!'
         })
@@ -42,7 +43,8 @@ exports.signup = async (req, res) => {
             alternateMobileNumber: '6758787698',
             address,
             landmark,
-            deviceId
+            deviceId,
+            role
         })
             .then(user => {
                 console.log("user===>", user)
@@ -50,7 +52,8 @@ exports.signup = async (req, res) => {
                     status: 'SUCCESS',
                     data: {
                         uuid: user.uuid,
-                        username: user.username
+                        username: user.username,
+                        role: user.role
                     }
                 })
                 return res.json({
