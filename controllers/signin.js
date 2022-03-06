@@ -16,11 +16,7 @@ exports.signin = async (req, res) => {
     })
     try {
         await User.findOne({
-<<<<<<< HEAD
-            attributes: ['uuid', 'username', 'role'],
-=======
             attributes: ['uuid', 'username', 'role', 'email'],
->>>>>>> main
             where: {
                 email, password
             }
