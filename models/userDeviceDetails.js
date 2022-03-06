@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         deviceId: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique:true,
             validate: {
                 notNull: true,
                 notEmpty: true
