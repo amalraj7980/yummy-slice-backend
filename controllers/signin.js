@@ -16,7 +16,11 @@ exports.signin = async (req, res) => {
     })
     try {
         await User.findOne({
+<<<<<<< HEAD
             attributes: ['uuid', 'username', 'role'],
+=======
+            attributes: ['uuid', 'username', 'role', 'email'],
+>>>>>>> main
             where: {
                 email, password
             }
@@ -25,7 +29,9 @@ exports.signin = async (req, res) => {
                 if (userInfo) {
                     const user = {
                         uuid: userInfo.uuid,
-                        username: userInfo.username
+                        username: userInfo.username,
+                        email: userInfo.email,
+                        role: userInfo.role
                     }
                     const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
                     return res.json({
@@ -48,7 +54,7 @@ exports.signin = async (req, res) => {
             }))
     }
     catch (err) {
-        console.log(err)
+        console.log("err========>", err)
         return res.json({
             status: 'FAILED',
             err

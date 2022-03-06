@@ -59,7 +59,11 @@ module.exports = (sequelize, DataTypes) => {
     OTP: {
       type: DataTypes.STRING
     },
+<<<<<<< HEAD
     role:{
+=======
+    role: {
+>>>>>>> main
       type: DataTypes.STRING,
       defaultValue: 'User'
     }

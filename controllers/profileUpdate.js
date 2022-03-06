@@ -35,6 +35,7 @@ exports.updateProfile = async (req, res) => {
                 }
             })
             .then((updated) => {
+<<<<<<< HEAD
                 if (updated) return res.json({
                     status: 'SUCCESS',
                     message: 'Successfully updated your profile',
@@ -44,6 +45,19 @@ exports.updateProfile = async (req, res) => {
                     status: 'FAILED',
                     message: 'Something wrong!!!'
                 })
+=======
+                if (!updated) {
+                    res.json({
+                        status: 'FAILED',
+                        message: "Couldn't update!!!"
+                    })
+                } else {
+                    res.json({
+                        status: 'SUCCESS',
+                        message: 'Successfully updated your profile'
+                    })
+                }
+>>>>>>> main
             })
             .catch(err => res.json({
                 status: 'FAILED',
