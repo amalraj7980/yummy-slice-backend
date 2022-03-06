@@ -7,7 +7,8 @@ exports.signup = async (req, res) => {
         mobileNumber,
         address,
         landmark,
-        userDeviceId
+        userDeviceId,
+        role
     } = req.body;
     if (!username || !email || !password || !mobileNumber)
         return res.json({
@@ -42,7 +43,8 @@ exports.signup = async (req, res) => {
             alternateMobileNumber: '6758787698',
             address,
             landmark,
-            deviceId
+            deviceId,
+            role
         })
             .then(user => {
                 console.log("user===>", user)

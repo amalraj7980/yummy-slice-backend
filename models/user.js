@@ -73,6 +73,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     OTP: {
       type: DataTypes.STRING
+    },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'User'
     }
   }, {
     sequelize,
