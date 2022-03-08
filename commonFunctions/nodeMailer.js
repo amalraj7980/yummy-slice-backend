@@ -31,7 +31,7 @@ const sentMail = async (email, User) => {
             })
             const mailOptions = {
                 from: 'krishnaabhi1231@outlook.com',
-                to: 'abhikrishabhi461998@gmail.com',
+                to: email,
                 subject: "Yummy Slice slice send you verification code.",
                 text: "Highly Confidential.Don't Share With Anyone.Your Password is-" + randomPassword,
             }
